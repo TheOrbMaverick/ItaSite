@@ -6,7 +6,14 @@ import ItaWorld from './ItaWorld'
 const root = ReactDOM.createRoot(document.querySelector('#root'))
 
 root.render(
-    <Canvas>
+    <Canvas 
+        camera={ { 
+            fov: 60,
+            near: 0.1,
+            far: 200,
+            position: [44, 28, -50]
+         } }
+        >
         <ItaWorld />
     </Canvas>
 )

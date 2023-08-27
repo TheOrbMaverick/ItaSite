@@ -1,13 +1,17 @@
 import { React, useRef } from 'react';
-import { Html, OrbitControls, useGLTF, useTexture } from '@react-three/drei';
+import { useFrame } from '@react-three/fiber';
+import { Html, Float, MeshReflectorMaterial, Text, OrbitControls, useGLTF, useTexture } from '@react-three/drei';
 import { MeshStandardMaterial } from 'three'; // Import MeshStandardMaterial
 import * as THREE from 'three'
 
 
 export default function itaWorld() {
 
-    const planeRef = useRef();
+    const trashbagRef = useRef()
+    const burgerRef = useRef()
 
+    const gradientTexture = useTexture('./plane.jpg')
+    gradientTexture.flipY = false
     //Models and Materials
 
     //STALL
@@ -136,15 +140,18 @@ export default function itaWorld() {
         }
     });
 
-
     return <>
 
-        <color args={[ '#241a1a' ]} attach='background' />
+        <color args={[ '#000000' ]} attach='background' />
 
-        <OrbitControls />
+        <OrbitControls 
+            minDistance={10}
+            maxDistance = {80}
+            maxPolarAngle = {Math.PI/2}
+            />
 
         {/* <directionalLight castShadow position={ [ 1, 2, 3 ] } intensity={ 1.5 } /> */}
-        <ambientLight intensity={ 0.8 } />
+        <ambientLight intensity={ .6 } />
         
         <primitive object={stallModel.scene}/>
         <primitive object={environsModel.scene}/>
@@ -155,10 +162,26 @@ export default function itaWorld() {
         <primitive object={breadModel.scene}/>
 
             {/* Infinite plane */}
-        {/* <mesh ref={planeRef} rotation={[-Math.PI / 2, 0, 0]} position={[0, -5, 0]}>
-            <planeBufferGeometry args={[1000, 1000]} />
-            <meshBasicMaterial color={0xFFD7AF} />
-        </mesh> */}
+        <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.01, 0]}>
+            <planeGeometry args={[1000, 1000]} />
+            <meshBasicMaterial map={gradientTexture} />
+        </mesh>
+
+        {/* color={0x948a7b} */}
+
+        <Float>
+        <Text
+            fontSize={2}
+            color={0xf2d2b1}
+            position={[-30, 16, 1]}
+            rotation-y={40}
+            maxWidth={14}
+            textAlign='center'
+        >
+            Hi My name is Ita and I talk to computers
+        </Text>
+
+        </Float>
         
 
     </>
