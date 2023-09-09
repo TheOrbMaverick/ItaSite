@@ -160,14 +160,14 @@ export default function itaWorld() {
 
         {/* color={0x948a7b} */}
 
-        <Html 
+        {/* <Html 
             position={[1, 2, 8]}
             wrapperClass='label'
             center
             distanceFactor={50}
         >
             *
-        </Html>
+        </Html> */}
 
         <Html
             transform
@@ -176,7 +176,7 @@ export default function itaWorld() {
             position={[-10, 8, 1]}
             rotation-y={7}
         >
-            <iframe src='https://bruno-simon.com/html'/>
+            {/* <iframe src='https://bruno-simon.com/html'/> */}
         </Html>
 
         <Float>
