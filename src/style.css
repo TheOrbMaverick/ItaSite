@@ -8,3 +8,22 @@ body,
     height: 100%;
     overflow: hidden;
 }
+
+.label > div {
+    font-family: Helvetica, Arial;
+    position: absolute;
+    background: #00000088;
+    width: 0.5rem;
+    height: 0.5rem;
+    color: white;
+    padding: 0.5rem;
+    white-space: nowrap;
+    overflow: hidden;
+    border-radius: 50%;
+    /* user-select: none; */
+}
+
+.wrapperClass iframe {
+    width: 3072px;
+    height: 1024px;
+}

@@ -1,6 +1,6 @@
 import { React, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { Html, Float, MeshReflectorMaterial, Text, OrbitControls, useGLTF, useTexture } from '@react-three/drei';
+import { Html, Float, Text3D, Text, OrbitControls, useGLTF, useTexture, useMatcapTexture } from '@react-three/drei';
 import { MeshStandardMaterial } from 'three'; // Import MeshStandardMaterial
 import * as THREE from 'three'
 
@@ -9,6 +9,7 @@ export default function itaWorld() {
 
     const trashbagRef = useRef()
     const burgerRef = useRef()
+    const [matcapTexture] = useMatcapTexture('7B5254_E9DCC7_B19986_C8AC91', 256)
 
     const gradientTexture = useTexture('./plane.jpg')
     gradientTexture.flipY = false
@@ -62,8 +63,6 @@ export default function itaWorld() {
         }
     });
 
-
-
     // Create a custom material
     const environsMaterial = new MeshStandardMaterial({
         map: environsTexture, // Assign the texture as the map
@@ -77,8 +76,6 @@ export default function itaWorld() {
             child.material = environsMaterial;
         }
     });
-
-
 
     // Create a custom material
     const poleMaterial = new MeshStandardMaterial({
@@ -94,8 +91,6 @@ export default function itaWorld() {
         }
     });
 
-
-
     // Create a custom material
     const binMaterial = new MeshStandardMaterial({
         map: binCoverTexture, // Assign the texture as the map
@@ -110,8 +105,6 @@ export default function itaWorld() {
         }
     });
 
-
-
     // Create a custom material
     const burgerMaterial = new MeshStandardMaterial({
         map: burgerTexture, // Assign the texture as the map
@@ -124,8 +117,6 @@ export default function itaWorld() {
             child.material = burgerMaterial;
         }
     });
-
-
 
     // Create a custom material
     const breadMaterial = new MeshStandardMaterial({
@@ -147,14 +138,14 @@ export default function itaWorld() {
         <OrbitControls 
             minDistance={10}
             maxDistance = {80}
-            maxPolarAngle = {Math.PI/2}
+            maxPolarAngle = {Math.PI/2.2}
             />
 
         {/* <directionalLight castShadow position={ [ 1, 2, 3 ] } intensity={ 1.5 } /> */}
         <ambientLight intensity={ .6 } />
         
         <primitive object={stallModel.scene}/>
-        <primitive object={environsModel.scene}/>
+        <primitive object={environsModel.scene} receiveShadow/>
         <primitive object={poleModel.scene}/>
         <primitive object={trashModel.scene}/>
         <primitive object={burgerModel.scene}/>
@@ -162,14 +153,34 @@ export default function itaWorld() {
         <primitive object={breadModel.scene}/>
 
             {/* Infinite plane */}
-        <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.01, 0]}>
+        <mesh receiveShadow rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.01, 0]}>
             <planeGeometry args={[1000, 1000]} />
             <meshBasicMaterial map={gradientTexture} />
         </mesh>
 
         {/* color={0x948a7b} */}
 
+        <Html 
+            position={[1, 2, 8]}
+            wrapperClass='label'
+            center
+            distanceFactor={50}
+        >
+            *
+        </Html>
+
+        <Html
+            transform
+            wrapperClass='htmlScreen'
+            distanceFactor={4}
+            position={[-10, 8, 1]}
+            rotation-y={7}
+        >
+            <iframe src='https://bruno-simon.com/html'/>
+        </Html>
+
         <Float>
+
         <Text
             fontSize={2}
             color={0xf2d2b1}
@@ -179,7 +190,30 @@ export default function itaWorld() {
             textAlign='center'
         >
             Hi My name is Ita and I talk to computers
+            This experience is under construction
         </Text>
+
+        {/* <Text3D
+            castShadow 
+            font='./fonts/Roboto Black_Regular.json'
+            position={[-30, 16, 1]}
+            rotation-y={40}
+            size={ 2 }
+            height={ 1.2 }
+            curveSegments={ 12 }
+            bevelEnabled
+            bevelThickness={ 0.02 }
+            bevelSize={ 0.02 }
+            bevelOffset={ 0 }
+            bevelSegments={ 5 }
+            textAlign="center"
+            maxWidth='20'
+            center
+        >
+            Hi! MY NAME IS ITA
+            {'\n'}THIS EXPERIENCE IS UNDER CONSTRUCTION
+            <meshMatcapMaterial matcap={matcapTexture} />
+        </Text3D> */}
 
         </Float>
         
