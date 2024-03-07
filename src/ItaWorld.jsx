@@ -1,6 +1,6 @@
 import { React, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { Html, Float, Text3D, Text, OrbitControls, useGLTF, useTexture, useMatcapTexture } from '@react-three/drei';
+import { Html, Float, Text3D, Text, OrbitControls, useGLTF, useTexture, useMatcapTexture, useProgress } from '@react-three/drei';
 import { MeshStandardMaterial } from 'three'; // Import MeshStandardMaterial
 import * as THREE from 'three'
 
